@@ -1,0 +1,33 @@
+import TermsConditions from "@/components/Conditions";
+import React from "react";
+import { ru } from "../constants/ru";
+import { us } from "../constants/us";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
+export const metadata = {
+  title: "Terms & Conditions – Invitation Maker",
+  description:
+    "Read the Terms & Conditions for Invitation Maker. Understand the rules, user responsibilities, and guidelines for using our online invitation creation platform.",
+  alternates: { canonical: "/conditions" },
+  robots: { index: true, follow: true },
+};
+
+const contentMap = {
+  us: us,
+  ru: ru,
+};
+
+const page = async ({ params }) => {
+  const { slug } = await params;
+  const text = contentMap[slug] || us;
+  return (
+    <div>
+      <Navbar navLinks={text?.navLinks} />
+      <TermsConditions />
+      <Footer footer={text?.footer} />
+    </div>
+  );
+};
+
+export default page;
